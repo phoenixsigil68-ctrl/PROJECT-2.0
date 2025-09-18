@@ -1,6 +1,6 @@
 'use client';
 
-import { useFormState, useFormStatus } from 'react-dom';
+import { useActionState, useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { createQuizAction, type CreateQuizState } from '@/app/actions';
 import type { Chapter, Grade, Subject } from '@/lib/types';
@@ -29,7 +29,7 @@ function SubmitButton() {
 }
 
 export function QuizGenerator({ chapter, grade, subject }: { chapter: Chapter; grade: Grade; subject: Subject }) {
-  const [state, formAction] = useFormState(createQuizAction, initialState);
+  const [state, formAction] = useActionState(createQuizAction, initialState);
   const { toast } = useToast();
 
   useEffect(() => {
