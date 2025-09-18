@@ -1,3 +1,47 @@
+import Image from 'next/image';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+import { SelectionForm } from '@/components/home/selection-form';
+import placeholderImages from '@/lib/placeholder-images.json';
+
 export default function Home() {
-  return <></>;
+  const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
+
+  return (
+    <main className="flex flex-col items-center justify-center min-h-screen p-4">
+      <div className="absolute top-0 left-0 w-full h-full z-0">
+        {heroImageData && (
+          <Image
+            src={heroImageData.imageUrl}
+            alt={heroImageData.description}
+            fill
+            className="object-cover opacity-10 dark:opacity-20"
+            data-ai-hint={heroImageData.imageHint}
+            priority
+          />
+        )}
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
+      </div>
+
+      <div className="z-10 text-center px-4 mb-8">
+        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-4 animate-fade-in-down">
+          વિદ્યાર્થી સહાયક
+        </h1>
+        <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
+          ધોરણ ૯-૧૨ના વિદ્યાર્થીઓ માટે એક સંપૂર્ણ શૈક્ષણિક પ્લેટફોર્મ.
+        </p>
+      </div>
+
+      <Card className="w-full max-w-md z-10 shadow-2xl backdrop-blur-sm bg-card/80">
+        <CardHeader>
+          <CardTitle className="text-center text-2xl font-headline">તમારો પાઠ પસંદ કરો</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <SelectionForm />
+        </CardContent>
+      </Card>
+      <footer className="z-10 text-center text-muted-foreground mt-8 text-sm">
+        <p>ગુજરાતના વિદ્યાર્થીઓ માટે પ્રેમથી બનાવેલ.</p>
+      </footer>
+    </main>
+  );
 }
