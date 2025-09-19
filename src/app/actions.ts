@@ -62,6 +62,6 @@ export async function chatAction(
   } catch (error) {
     console.error(error);
     const message = error instanceof Error ? error.message : 'An unknown error occurred.';
-    return { ...prevState, error: `Failed to get response: ${message}` };
+    return { messages: newHistory, error: `Failed to get response: ${message}` };
   }
 }
