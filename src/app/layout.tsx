@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
+import { ChatWidget } from '@/components/chatbot/chat-widget';
 
 export const metadata: Metadata = {
   title: 'વિદ્યાર્થી સહાયક',
@@ -24,6 +25,7 @@ export default function RootLayout({
       </head>
       <body className="font-body antialiased">
         {children}
+        <ChatWidget />
         <Toaster />
       </body>
     </html>

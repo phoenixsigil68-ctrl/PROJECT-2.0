@@ -2,6 +2,7 @@
 
 import { generateQuizQuestions } from '@/ai/flows/generate-quiz-questions';
 import type { GenerateQuizQuestionsOutput } from '@/ai/flows/generate-quiz-questions';
+import { chat, type ChatInput } from '@/ai/flows/chat-flow';
 
 export type CreateQuizState = {
   formKey: number;
@@ -34,5 +35,33 @@ export async function createQuizAction(
     console.error(error);
     const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
     return { ...prevState, success: false, message: `ક્વિઝ બનાવવામાં નિષ્ફળ: ${message}` };
+  }
+}
+
+export type ChatState = {
+  messages: { role: 'user' | 'model'; content: string }[];
+  error?: string;
+};
+
+export async function chatAction(
+  prevState: ChatState,
+  formData: FormData
+): Promise<ChatState> {
+  const userInput = formData.get('message') as string;
+  if (!userInput) {
+    return { ...prevState, error: 'Message is required' };
+  }
+
+  const newHistory = [...prevState.messages, { role: 'user' as const, content: userInput }];
+
+  try {
+    const response = await chat({
+      history: newHistory,
+    });
+    return { messages: [...newHistory, { role: 'model' as const, content: response }] };
+  } catch (error) {
+    console.error(error);
+    const message = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return { ...prevState, error: `Failed to get response: ${message}` };
   }
 }
