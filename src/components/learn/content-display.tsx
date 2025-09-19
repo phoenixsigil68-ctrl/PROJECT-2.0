@@ -1,13 +1,15 @@
-import type { Chapter } from '@/lib/types';
+import type { Chapter, Grade, Subject } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
 import placeholderImages from '@/lib/placeholder-images.json';
-import { BookMarked, ExternalLink } from 'lucide-react';
+import { BookMarked, ExternalLink, Youtube } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
 
-export function ContentDisplay({ chapter }: { chapter: Chapter }) {
+export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, grade: Grade, subject: Subject }) {
   const chapterImage = placeholderImages.placeholderImages.find(img => img.id === chapter.imageUrl);
+  const youtubeSearchQuery = encodeURIComponent(`${grade.name} ${subject.name} ${chapter.name}`);
+  const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${youtubeSearchQuery}`;
 
   return (
     <Card>
@@ -15,8 +17,8 @@ export function ContentDisplay({ chapter }: { chapter: Chapter }) {
         <div className="space-y-6 text-lg text-foreground/90 leading-relaxed">
           <p>{chapter.content}</p>
 
-          {chapter.textbookUrl && (
-            <div className="my-8 rounded-lg border bg-secondary/30 p-6 shadow-sm">
+          <div className="my-8 rounded-lg border bg-secondary/30 p-6 shadow-sm space-y-6">
+            <div>
               <h3 className="text-2xl font-bold font-headline mb-4 text-primary flex items-center">
                 <BookMarked className="mr-3 h-6 w-6" />
                 પાઠ્યપુસ્તક
@@ -25,13 +27,29 @@ export function ContentDisplay({ chapter }: { chapter: Chapter }) {
                 સંપૂર્ણ પ્રકરણ વાંચવા અને અભ્યાસ કરવા માટે સત્તાવાર પાઠ્યપુસ્તક ખોલો.
               </p>
               <Button asChild>
-                <Link href={chapter.textbookUrl} target="_blank" rel="noopener noreferrer">
+                <Link href={chapter.textbookUrl || 'https://www.selfstudys.com/'} target="_blank" rel="noopener noreferrer">
                   પાઠ્યપુસ્તક ખોલો
                   <ExternalLink className="ml-2 h-4 w-4" />
                 </Link>
               </Button>
             </div>
-          )}
+            
+            <div className="border-t pt-6">
+              <h3 className="text-2xl font-bold font-headline mb-4 text-primary flex items-center">
+                <Youtube className="mr-3 h-6 w-6" />
+                વિડિઓ લેક્ચર
+              </h3>
+              <p className="mb-4 text-muted-foreground">
+                આ પ્રકરણને લગતા વિડિઓ લેક્ચર્સ શોધવા માટે YouTube પર જાઓ.
+              </p>
+               <Button asChild variant="secondary">
+                <Link href={youtubeSearchUrl} target="_blank" rel="noopener noreferrer">
+                  YouTube પર શોધો
+                  <ExternalLink className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </div>
+          </div>
 
           {chapterImage && (
             <div className="my-8 rounded-lg overflow-hidden shadow-lg border">

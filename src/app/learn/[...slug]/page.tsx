@@ -41,7 +41,7 @@ export default function LearnPage({ params }: { params: { slug: string[] } }) {
           <TabsTrigger value="quiz">ક્વિઝ</TabsTrigger>
         </TabsList>
         <TabsContent value="content" className="mt-4">
-          <ContentDisplay chapter={chapter} />
+          <ContentDisplay chapter={chapter} grade={grade} subject={subject} />
         </TabsContent>
         <TabsContent value="quiz" className="mt-4">
           <QuizView chapter={chapter} grade={grade} subject={subject} />
