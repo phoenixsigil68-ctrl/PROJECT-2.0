@@ -7,6 +7,7 @@ export interface Chapter {
   videoUrl?: string;
   imageUrl?: string;
   imageHint?: string;
+  textbookUrl?: string;
   quiz: QuizQuestion[];
 }
 
