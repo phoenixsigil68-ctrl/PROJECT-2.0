@@ -27,7 +27,7 @@ export async function createQuizAction(
       gradeLevel: grade,
       subject: subject,
       chapter: chapter,
-      numberOfQuestions: 10,
+      numberOfQuestions: 15,
     });
     return { formKey: prevState.formKey + 1, success: true, message: 'ક્વિઝ સફળતાપૂર્વક બનાવવામાં આવી!', data: quizData };
   } catch (error) {
