@@ -7,6 +7,7 @@ import { Home } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { FlashcardView } from '@/components/learn/flashcard-view';
+import { LearningTracker } from '@/hooks/use-learning-tracker';
 
 export default function LearnPage({ params }: { params: { slug: string[] } }) {
   const [gradeId, subjectId, chapterId] = params.slug;
@@ -21,6 +22,7 @@ export default function LearnPage({ params }: { params: { slug: string[] } }) {
 
   return (
     <div className="min-h-screen p-4 md:p-8">
+       <LearningTracker />
       <header className="flex items-center justify-between mb-6">
         <div>
           <h1 className="text-2xl md:text-3xl font-bold font-headline text-primary">{chapter.name}</h1>

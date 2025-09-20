@@ -3,6 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SelectionForm } from '@/components/home/selection-form';
 import placeholderImages from '@/lib/placeholder-images.json';
 import { QuotesSlider } from '@/components/home/quotes-slider';
+import { DailyProgress } from '@/components/home/daily-progress';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -30,6 +31,10 @@ export default function Home() {
         <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
           ધોરણ ૯-૧૨ના વિદ્યાર્થીઓ માટે એક સંપૂર્ણ શૈક્ષણિક પ્લેટફોર્મ.
         </p>
+      </div>
+      
+      <div className="w-full max-w-md z-10 mb-8">
+        <DailyProgress />
       </div>
 
       <Card className="w-full max-w-md z-10 shadow-2xl backdrop-blur-sm bg-card/80">
