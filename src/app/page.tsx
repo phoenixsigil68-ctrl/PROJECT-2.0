@@ -2,6 +2,7 @@ import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SelectionForm } from '@/components/home/selection-form';
 import placeholderImages from '@/lib/placeholder-images.json';
+import { QuotesSlider } from '@/components/home/quotes-slider';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -22,7 +23,7 @@ export default function Home() {
         <div className="absolute inset-0 bg-gradient-to-b from-background via-background/80 to-background" />
       </div>
 
-      <div className="z-10 text-center px-4 mb-8">
+      <div className="z-10 text-center px-4 mb-8 mt-16">
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-4 animate-fade-in-down">
           વિદ્યાર્થી સહાયક
         </h1>
@@ -39,6 +40,11 @@ export default function Home() {
           <SelectionForm />
         </CardContent>
       </Card>
+      
+      <div className="w-full max-w-4xl z-10 mt-12">
+         <QuotesSlider />
+      </div>
+
       <footer className="z-10 text-center text-muted-foreground mt-8 text-sm">
         <p>ગુજરાતના વિદ્યાર્થીઓ માટે પ્રેમથી બનાવેલ.</p>
       </footer>
