@@ -5,6 +5,8 @@ import placeholderImages from '@/lib/placeholder-images.json';
 import { BookMarked, ExternalLink, Youtube } from 'lucide-react';
 import { Button } from '../ui/button';
 import Link from 'next/link';
+import { AskDoubt } from './ask-doubt';
+import { Separator } from '../ui/separator';
 
 export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, grade: Grade, subject: Subject }) {
   const chapterImage = placeholderImages.placeholderImages.find(img => img.id === chapter.imageUrl);
@@ -18,6 +20,8 @@ export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, 
           <p>{chapter.content}</p>
 
           <div className="my-8 rounded-lg border bg-secondary/30 p-6 shadow-sm space-y-6">
+             <AskDoubt chapter={chapter} />
+             <Separator />
             <div>
               <h3 className="text-2xl font-bold font-headline mb-4 text-primary flex items-center">
                 <BookMarked className="mr-3 h-6 w-6" />

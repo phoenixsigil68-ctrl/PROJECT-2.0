@@ -3,6 +3,7 @@
 import { generateQuizQuestions } from '@/ai/flows/generate-quiz-questions';
 import type { GenerateQuizQuestionsOutput } from '@/ai/flows/generate-quiz-questions';
 import { chat, type ChatInput } from '@/ai/flows/chat-flow';
+import { askDoubt } from '@/ai/flows/ask-doubt-flow';
 
 export type CreateQuizState = {
   formKey: number;
@@ -63,5 +64,36 @@ export async function chatAction(
     console.error(error);
     const message = error instanceof Error ? error.message : 'An unknown error occurred.';
     return { messages: newHistory, error: `Failed to get response: ${message}` };
+  }
+}
+
+export type AskDoubtState = {
+  formKey: number;
+  question: string;
+  answer: string | null;
+  error?: string;
+};
+
+export async function askDoubtAction(
+  prevState: AskDoubtState,
+  formData: FormData
+): Promise<AskDoubtState> {
+  const question = formData.get('question') as string;
+  const chapterContent = formData.get('chapterContent') as string;
+
+  if (!question) {
+    return { ...prevState, error: 'પ્રશ્ન જરૂરી છે.', answer: null };
+  }
+
+  try {
+    const response = await askDoubt({
+      chapterContent: chapterContent,
+      question: question,
+    });
+    return { formKey: prevState.formKey + 1, question, answer: response };
+  } catch (error) {
+    console.error(error);
+    const message = error instanceof Error ? error.message : 'An unknown error occurred.';
+    return { ...prevState, question, error: `જવાબ મેળવવામાં નિષ્ફળ: ${message}`, answer: null };
   }
 }
