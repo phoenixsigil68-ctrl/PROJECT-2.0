@@ -7,6 +7,7 @@ import { Button } from '../ui/button';
 import Link from 'next/link';
 import { AskDoubt } from './ask-doubt';
 import { Separator } from '../ui/separator';
+import { ContentSummarizer } from './content-summarizer';
 
 export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, grade: Grade, subject: Subject }) {
   const chapterImage = placeholderImages.placeholderImages.find(img => img.id === chapter.imageUrl);
@@ -20,6 +21,8 @@ export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, 
           <p>{chapter.content}</p>
 
           <div className="my-8 rounded-lg border bg-secondary/30 p-6 shadow-sm space-y-6">
+             <ContentSummarizer chapter={chapter} />
+             <Separator />
              <AskDoubt chapter={chapter} />
              <Separator />
             <div>

@@ -5,6 +5,7 @@ import type { GenerateQuizQuestionsOutput } from '@/ai/flows/generate-quiz-quest
 import { chat, type ChatInput } from '@/ai/flows/chat-flow';
 import { askDoubt } from '@/ai/flows/ask-doubt-flow';
 import { generateFlashcards, type GenerateFlashcardsOutput } from '@/ai/flows/generate-flashcards-flow';
+import { summarizeContent } from '@/ai/flows/summarize-content-flow';
 
 export type CreateQuizState = {
   formKey: number;
@@ -122,5 +123,30 @@ export async function createFlashcardsAction(
     console.error(error);
     const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
     return { success: false, message: `ફ્લેશકાર્ડ્સ બનાવવામાં નિષ્ફળ: ${message}`, data: null };
+  }
+}
+
+
+export type SummarizeContentState = {
+  summary: string | null;
+  error?: string;
+};
+
+export async function summarizeContentAction(
+  chapterContent: string
+): Promise<SummarizeContentState> {
+  if (!chapterContent) {
+    return { summary: null, error: 'પ્રકરણ સામગ્રી ખૂટે છે.' };
+  }
+
+  try {
+    const response = await summarizeContent({
+      chapterContent: chapterContent,
+    });
+    return { summary: response };
+  } catch (error) {
+    console.error(error);
+    const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
+    return { summary: null, error: `સારાંશ બનાવવામાં નિષ્ફળ: ${message}` };
   }
 }
