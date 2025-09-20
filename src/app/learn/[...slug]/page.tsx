@@ -6,6 +6,7 @@ import { QuizView } from '@/components/learn/quiz-view';
 import { Home } from 'lucide-react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { FlashcardView } from '@/components/learn/flashcard-view';
 
 export default function LearnPage({ params }: { params: { slug: string[] } }) {
   const [gradeId, subjectId, chapterId] = params.slug;
@@ -36,12 +37,16 @@ export default function LearnPage({ params }: { params: { slug: string[] } }) {
       </header>
 
       <Tabs defaultValue="content" className="w-full">
-        <TabsList className="grid w-full grid-cols-2 md:w-[400px]">
+        <TabsList className="grid w-full grid-cols-3 md:w-[600px]">
           <TabsTrigger value="content">અભ્યાસક્રમ</TabsTrigger>
+          <TabsTrigger value="flashcards">ફ્લેશકાર્ડ્સ</TabsTrigger>
           <TabsTrigger value="quiz">ક્વિઝ</TabsTrigger>
         </TabsList>
         <TabsContent value="content" className="mt-4">
           <ContentDisplay chapter={chapter} grade={grade} subject={subject} />
+        </TabsContent>
+        <TabsContent value="flashcards" className="mt-4">
+          <FlashcardView chapter={chapter} />
         </TabsContent>
         <TabsContent value="quiz" className="mt-4">
           <QuizView chapter={chapter} grade={grade} subject={subject} />

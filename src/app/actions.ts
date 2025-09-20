@@ -4,6 +4,7 @@ import { generateQuizQuestions } from '@/ai/flows/generate-quiz-questions';
 import type { GenerateQuizQuestionsOutput } from '@/ai/flows/generate-quiz-questions';
 import { chat, type ChatInput } from '@/ai/flows/chat-flow';
 import { askDoubt } from '@/ai/flows/ask-doubt-flow';
+import { generateFlashcards, type GenerateFlashcardsOutput } from '@/ai/flows/generate-flashcards-flow';
 
 export type CreateQuizState = {
   formKey: number;
@@ -95,5 +96,31 @@ export async function askDoubtAction(
     console.error(error);
     const message = error instanceof Error ? error.message : 'An unknown error occurred.';
     return { ...prevState, question, error: `જવાબ મેળવવામાં નિષ્ફળ: ${message}`, answer: null };
+  }
+}
+
+export type CreateFlashcardsState = {
+  success: boolean;
+  message: string;
+  data: GenerateFlashcardsOutput | null;
+};
+
+export async function createFlashcardsAction(
+  chapterContent: string
+): Promise<CreateFlashcardsState> {
+  if (!chapterContent) {
+    return { success: false, message: 'પ્રકરણ સામગ્રી ખૂટે છે.', data: null };
+  }
+
+  try {
+    const flashcardData = await generateFlashcards({
+      chapterContent: chapterContent,
+      count: 10,
+    });
+    return { success: true, message: 'ફ્લેશકાર્ડ્સ સફળતાપૂર્વક બનાવવામાં આવ્યા!', data: flashcardData };
+  } catch (error) {
+    console.error(error);
+    const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
+    return { success: false, message: `ફ્લેશકાર્ડ્સ બનાવવામાં નિષ્ફળ: ${message}`, data: null };
   }
 }
