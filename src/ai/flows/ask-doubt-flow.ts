@@ -42,6 +42,7 @@ Your task is to provide a clear, simple, and encouraging answer to the student's
 - Base your answer ONLY on the provided chapter content. Do not introduce outside information.
 - If the question cannot be answered from the content, politely state that the answer is not in this chapter's material.
 - Keep the tone supportive and helpful.
+- **IMPORTANT**: When writing mathematical formulas, use standard and simple text notation. For example, write (2 * u * sin(θ)) / g instead of a complex format. Use symbols like *, /, +, -, ^ for operations. Ensure it is easy for a student to read.
 `,
 });
 
