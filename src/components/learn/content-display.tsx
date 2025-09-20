@@ -1,3 +1,5 @@
+'use client';
+
 import type { Chapter, Grade, Subject } from '@/lib/types';
 import Image from 'next/image';
 import { Card, CardContent } from '@/components/ui/card';
@@ -8,8 +10,19 @@ import Link from 'next/link';
 import { AskDoubt } from './ask-doubt';
 import { Separator } from '../ui/separator';
 import { ContentSummarizer } from './content-summarizer';
+import { useActionState } from 'react';
+import { askDoubtAction, type AskDoubtState } from '@/app/actions';
+
+const initialAskDoubtState: AskDoubtState = {
+  formKey: 0,
+  question: '',
+  answer: null,
+};
+
 
 export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, grade: Grade, subject: Subject }) {
+  const [askDoubtState, askDoubtFormAction, isAskDoubtPending] = useActionState(askDoubtAction, initialAskDoubtState);
+  
   const chapterImage = placeholderImages.placeholderImages.find(img => img.id === chapter.imageUrl);
   const youtubeSearchQuery = encodeURIComponent(`${grade.name} ${subject.name} ${chapter.name}`);
   const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${youtubeSearchQuery}`;
@@ -23,7 +36,12 @@ export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, 
           <div className="my-8 rounded-lg border bg-secondary/30 p-6 shadow-sm space-y-6">
              <ContentSummarizer chapter={chapter} />
              <Separator />
-             <AskDoubt chapter={chapter} />
+             <AskDoubt 
+                chapter={chapter} 
+                formAction={askDoubtFormAction}
+                state={askDoubtState}
+                isPending={isAskDoubtPending}
+             />
              <Separator />
             <div>
               <h3 className="text-2xl font-bold font-headline mb-4 text-primary flex items-center">

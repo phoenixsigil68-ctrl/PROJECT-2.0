@@ -1,19 +1,20 @@
 'use client';
 
-import { useActionState, useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { askDoubtAction, type AskDoubtState } from '@/app/actions';
+import type { AskDoubtState } from '@/app/actions';
 import type { Chapter } from '@/lib/types';
-import { HelpCircle, Loader2, Send, Sparkles } from 'lucide-react';
+import { HelpCircle, Loader2, Send } from 'lucide-react';
 import { Card, CardContent } from '../ui/card';
 
-const initialState: AskDoubtState = {
-  formKey: 0,
-  question: '',
-  answer: null,
-};
+interface AskDoubtProps {
+  chapter: Chapter;
+  formAction: (payload: FormData) => void;
+  state: AskDoubtState;
+  isPending: boolean;
+}
 
 function SubmitButton() {
   const { pending } = useFormStatus();
@@ -34,8 +35,7 @@ function SubmitButton() {
   );
 }
 
-export function AskDoubt({ chapter }: { chapter: Chapter }) {
-  const [state, formAction, isPending] = useActionState(askDoubtAction, initialState);
+export function AskDoubt({ chapter, formAction, state, isPending }: AskDoubtProps) {
   const formRef = useRef<HTMLFormElement>(null);
 
   useEffect(() => {
