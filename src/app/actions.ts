@@ -6,6 +6,8 @@ import { chat, type ChatInput } from '@/ai/flows/chat-flow';
 import { askDoubt } from '@/ai/flows/ask-doubt-flow';
 import { generateFlashcards, type GenerateFlashcardsOutput } from '@/ai/flows/generate-flashcards-flow';
 import { summarizeContent } from '@/ai/flows/summarize-content-flow';
+import { generateQuizFromImage, type GenerateQuizFromImageOutput } from '@/ai/flows/generate-quiz-from-image-flow';
+
 
 export type CreateQuizState = {
   formKey: number;
@@ -149,4 +151,33 @@ export async function summarizeContentAction(
     const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
     return { summary: null, error: `સારાંશ બનાવવામાં નિષ્ફળ: ${message}` };
   }
+}
+
+export type CreateQuizFromImageState = {
+    formKey: number;
+    success: boolean;
+    message: string;
+    data: GenerateQuizFromImageOutput | null;
+};
+
+export async function createQuizFromImageAction(
+    prevState: CreateQuizFromImageState,
+    formData: FormData
+): Promise<CreateQuizFromImageState> {
+    const imageDataUri = formData.get('imageDataUri') as string;
+
+    if (!imageDataUri) {
+        return { ...prevState, success: false, message: 'કૃપા કરીને એક છબી અપલોડ કરો.' };
+    }
+
+    try {
+        const quizData = await generateQuizFromImage({
+            imageDataUri: imageDataUri,
+        });
+        return { formKey: prevState.formKey + 1, success: true, message: 'છબીમાંથી ક્વિઝ સફળતાપૂર્વક બનાવવામાં આવી!', data: quizData };
+    } catch (error) {
+        console.error(error);
+        const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
+        return { ...prevState, success: false, message: `ક્વિઝ બનાવવામાં નિષ્ફળ: ${message}` };
+    }
 }

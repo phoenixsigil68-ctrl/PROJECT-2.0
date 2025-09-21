@@ -10,6 +10,7 @@
 
 import {ai} from '@/ai/genkit';
 import {z} from 'genkit';
+import { GenerateQuizQuestionsOutputSchema } from '@/ai/schemas';
 
 const GenerateQuizQuestionsInputSchema = z.object({
   gradeLevel: z.enum(['9', '10', '11', '12']).describe('The grade level of the quiz.'),
@@ -18,17 +19,8 @@ const GenerateQuizQuestionsInputSchema = z.object({
   numberOfQuestions: z.number().int().min(1).max(20).default(5).describe('The number of questions to generate.'),
 });
 export type GenerateQuizQuestionsInput = z.infer<typeof GenerateQuizQuestionsInputSchema>;
-
-const MultipleChoiceQuestionSchema = z.object({
-  question: z.string().describe('The question text.'),
-  options: z.array(z.string()).min(4).max(4).describe('The multiple choice options for the question.'),
-  correctAnswerIndex: z.number().int().min(0).max(3).describe('The index of the correct answer in the options array.'),
-});
-
-const GenerateQuizQuestionsOutputSchema = z.object({
-  questions: z.array(MultipleChoiceQuestionSchema).describe('An array of multiple-choice questions.'),
-});
 export type GenerateQuizQuestionsOutput = z.infer<typeof GenerateQuizQuestionsOutputSchema>;
+
 
 export async function generateQuizQuestions(input: GenerateQuizQuestionsInput): Promise<GenerateQuizQuestionsOutput> {
   return generateQuizQuestionsFlow(input);

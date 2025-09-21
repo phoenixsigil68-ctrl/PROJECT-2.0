@@ -4,6 +4,9 @@ import { SelectionForm } from '@/components/home/selection-form';
 import placeholderImages from '@/lib/placeholder-images.json';
 import { QuotesSlider } from '@/components/home/quotes-slider';
 import { DailyProgress } from '@/components/home/daily-progress';
+import { Button } from '@/components/ui/button';
+import Link from 'next/link';
+import { FileImage } from 'lucide-react';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -46,6 +49,15 @@ export default function Home() {
         </CardContent>
       </Card>
       
+       <div className="z-10 mt-8">
+          <Button asChild variant="secondary" size="lg">
+            <Link href="/quiz-from-image">
+              <FileImage className="mr-2" />
+              છબીમાંથી ક્વિઝ બનાવો
+            </Link>
+          </Button>
+        </div>
+
       <div className="w-full max-w-4xl z-10 mt-12">
          <QuotesSlider />
       </div>
