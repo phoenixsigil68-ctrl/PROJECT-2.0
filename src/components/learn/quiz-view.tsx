@@ -46,7 +46,7 @@ export function QuizView({ chapter, grade, subject }: { chapter: Chapter; grade:
           <CardContent>
              <Button asChild variant="outline">
                 <Link href="/quiz-from-image">
-                    Create Quiz with Image
+                    For Create Quiz with Image click here
                 </Link>
              </Button>
           </CardContent>
