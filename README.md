@@ -1,4 +1,4 @@
-# Firebase Studio Project - विद्यार्थी સહાયક
+git # Firebase Studio Project - विद्यार्थी સહાયક
 
 This is a Next.js application built within Firebase Studio. It's an educational platform for students in grades 9-12 in Gujarat.
 
