@@ -28,49 +28,8 @@ export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, 
   const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${youtubeSearchQuery}`;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-2 space-y-8">
-        <Card>
-          <CardContent className="p-6">
-            <div className="prose dark:prose-invert max-w-none text-lg text-foreground/90 leading-relaxed">
-              <p>{chapter.content}</p>
-            </div>
-          </CardContent>
-        </Card>
-        
-        {chapterImage && (
-          <Card className="overflow-hidden">
-            <div className="aspect-w-16 aspect-h-9">
-              <Image
-                src={chapterImage.imageUrl}
-                alt={chapterImage.description}
-                fill
-                className="object-cover"
-                data-ai-hint={chapterImage.imageHint}
-              />
-            </div>
-          </Card>
-        )}
-
-        {chapter.videoUrl && (
-            <Card>
-                <CardContent className="p-6">
-                    <h3 className="text-2xl font-bold font-headline mb-4 text-primary">વિડિઓ લેક્ચર</h3>
-                    <div className="aspect-video rounded-lg overflow-hidden">
-                        <iframe
-                        className="w-full h-full border-0"
-                        src={chapter.videoUrl}
-                        title="YouTube video player"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowFullScreen
-                        ></iframe>
-                    </div>
-                </CardContent>
-            </Card>
-        )}
-      </div>
-
-      <div className="space-y-6 lg:col-span-1">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+      
         <Card>
             <CardContent className="p-6">
                 <ContentSummarizer chapter={chapter} />
@@ -123,7 +82,34 @@ export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, 
                 </div>
             </CardContent>
         </Card>
+         {chapterImage && (
+          <Card className="overflow-hidden aspect-video">
+              <Image
+                src={chapterImage.imageUrl}
+                alt={chapterImage.description}
+                fill
+                className="object-cover"
+                data-ai-hint={chapterImage.imageHint}
+              />
+          </Card>
+        )}
+
+        {chapter.videoUrl && (
+            <Card className="md:col-span-2">
+                <CardContent className="p-6">
+                    <h3 className="text-2xl font-bold font-headline mb-4 text-primary">વિડિઓ લેક્ચર</h3>
+                    <div className="aspect-video rounded-lg overflow-hidden">
+                        <iframe
+                        className="w-full h-full border-0"
+                        src={chapter.videoUrl}
+                        title="YouTube video player"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                        ></iframe>
+                    </div>
+                </CardContent>
+            </Card>
+        )}
       </div>
-    </div>
   );
 }
