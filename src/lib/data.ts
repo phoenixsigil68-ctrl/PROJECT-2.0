@@ -82,8 +82,6 @@ export const AppData: Grade[] = [
             name: 'પ્રકરણ ૧: રાસાયણિક પ્રક્રિયાઓ અને સમીકરણો',
             content:
               'આ પ્રકરણમાં આપણે રાસાયણિક સમીકરણો કેવી રીતે લખવા અને સંતુલિત કરવા, તેમજ વિવિધ પ્રકારની રાસાયણિક પ્રક્રિયાઓ જેવી કે સંયોગીકરણ, વિઘટન, વિસ્થાપન અને રેડોક્ષ પ્રક્રિયાઓનો અભ્યાસ કરીશું.',
-            imageUrl: 'placeholder-science',
-            imageHint: 'chemistry reaction',
             textbookUrl: 'https://www.selfstudys.com/',
             quiz: [
               {
@@ -188,4 +186,5 @@ export const AppData: Grade[] = [
   },
 ];
 
+    
     
