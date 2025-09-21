@@ -21,39 +21,41 @@ export default function LearnPage({ params }: { params: { slug: string[] } }) {
   }
 
   return (
-    <div className="min-h-screen p-4 md:p-8">
-       <LearningTracker />
-      <header className="flex items-center justify-between mb-6">
-        <div>
-          <h1 className="text-2xl md:text-3xl font-bold font-headline text-primary">{chapter.name}</h1>
-          <p className="text-muted-foreground">
-            {grade.name} - {subject.name}
-          </p>
-        </div>
-        <Button asChild variant="outline" size="sm">
-          <Link href="/">
-            <Home className="mr-2 h-4 w-4" />
-            મુખ્ય પૃષ્ઠ
-          </Link>
-        </Button>
-      </header>
+    <div className="min-h-screen bg-secondary/40">
+      <div className="container mx-auto p-4 md:p-8">
+        <LearningTracker />
+        <header className="flex items-center justify-between mb-6 bg-card p-4 rounded-xl shadow-sm border">
+          <div>
+            <p className="text-sm text-muted-foreground">
+              {grade.name} - {subject.name}
+            </p>
+            <h1 className="text-2xl md:text-3xl font-bold font-headline text-primary">{chapter.name}</h1>
+          </div>
+          <Button asChild variant="outline">
+            <Link href="/">
+              <Home className="mr-2 h-4 w-4" />
+              મુખ્ય પૃષ્ઠ
+            </Link>
+          </Button>
+        </header>
 
-      <Tabs defaultValue="content" className="w-full">
-        <TabsList className="grid w-full grid-cols-3 md:w-[600px]">
-          <TabsTrigger value="content">અભ્યાસક્રમ</TabsTrigger>
-          <TabsTrigger value="flashcards">ફ્લેશકાર્ડ્સ</TabsTrigger>
-          <TabsTrigger value="quiz">ક્વિઝ</TabsTrigger>
-        </TabsList>
-        <TabsContent value="content" className="mt-4">
-          <ContentDisplay chapter={chapter} grade={grade} subject={subject} />
-        </TabsContent>
-        <TabsContent value="flashcards" className="mt-4">
-          <FlashcardView chapter={chapter} />
-        </TabsContent>
-        <TabsContent value="quiz" className="mt-4">
-          <QuizView chapter={chapter} grade={grade} subject={subject} />
-        </TabsContent>
-      </Tabs>
+        <Tabs defaultValue="content" className="w-full">
+          <TabsList className="grid w-full grid-cols-1 md:grid-cols-3 md:w-fit mx-auto md:mx-0">
+            <TabsTrigger value="content">અભ્યાસક્રમ</TabsTrigger>
+            <TabsTrigger value="flashcards">ફ્લેશકાર્ડ્સ</TabsTrigger>
+            <TabsTrigger value="quiz">ક્વિઝ</TabsTrigger>
+          </TabsList>
+          <TabsContent value="content" className="mt-4">
+            <ContentDisplay chapter={chapter} grade={grade} subject={subject} />
+          </TabsContent>
+          <TabsContent value="flashcards" className="mt-4">
+            <FlashcardView chapter={chapter} />
+          </TabsContent>
+          <TabsContent value="quiz" className="mt-4">
+            <QuizView chapter={chapter} grade={grade} subject={subject} />
+          </TabsContent>
+        </Tabs>
+      </div>
     </div>
   );
 }

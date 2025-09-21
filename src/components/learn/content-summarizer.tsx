@@ -22,15 +22,15 @@ export function ContentSummarizer({ chapter }: { chapter: Chapter }) {
 
   return (
     <div>
-      <h3 className="text-2xl font-bold font-headline mb-4 text-primary flex items-center">
+      <h3 className="text-xl font-bold font-headline mb-3 text-primary flex items-center">
         <Pilcrow className="mr-3 h-6 w-6" />
         AI સારાંશ
       </h3>
-      <p className="mb-4 text-muted-foreground">
+      <p className="mb-4 text-muted-foreground text-sm">
         આખા પ્રકરણનો મુખ્ય સારાંશ મેળવવા માટે નીચેનું બટન દબાવો.
       </p>
 
-      <Button onClick={handleGenerateSummary} disabled={isLoading} size="sm">
+      <Button onClick={handleGenerateSummary} disabled={isLoading}>
         {isLoading ? (
           <>
             <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -52,7 +52,7 @@ export function ContentSummarizer({ chapter }: { chapter: Chapter }) {
       )}
 
       {state?.summary && !isLoading && (
-         <Card className="mt-4 bg-background shadow-md border-primary/20">
+         <Card className="mt-4 bg-background shadow-inner">
           <CardContent className="p-4">
              <div className="whitespace-pre-wrap text-sm leading-relaxed text-foreground/90">
                 {state.summary}

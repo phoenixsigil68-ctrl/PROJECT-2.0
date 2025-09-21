@@ -45,15 +45,15 @@ export function SelectionForm() {
   const availableGrades = AppData.filter(grade => grade.subjects.length > 0);
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} className="space-y-4">
       <div className="space-y-2">
         <Select onValueChange={setSelectedGrade} value={selectedGrade}>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full h-12 text-base">
             <SelectValue placeholder="ધોરણ પસંદ કરો" />
           </SelectTrigger>
           <SelectContent>
             {availableGrades.map(grade => (
-              <SelectItem key={grade.id} value={grade.id}>
+              <SelectItem key={grade.id} value={grade.id} className="text-base">
                 {grade.name}
               </SelectItem>
             ))}
@@ -62,12 +62,12 @@ export function SelectionForm() {
       </div>
       <div className="space-y-2">
         <Select onValueChange={setSelectedSubject} value={selectedSubject} disabled={!selectedGrade}>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full h-12 text-base">
             <SelectValue placeholder="વિષય પસંદ કરો" />
           </SelectTrigger>
           <SelectContent>
             {subjects.map(subject => (
-              <SelectItem key={subject.id} value={subject.id}>
+              <SelectItem key={subject.id} value={subject.id} className="text-base">
                 {subject.name}
               </SelectItem>
             ))}
@@ -76,12 +76,12 @@ export function SelectionForm() {
       </div>
       <div className="space-y-2">
         <Select onValueChange={setSelectedChapter} value={selectedChapter} disabled={!selectedSubject}>
-          <SelectTrigger className="w-full">
+          <SelectTrigger className="w-full h-12 text-base">
             <SelectValue placeholder="પ્રકરણ પસંદ કરો" />
           </SelectTrigger>
           <SelectContent>
             {chapters.map(chapter => (
-              <SelectItem key={chapter.id} value={chapter.id}>
+              <SelectItem key={chapter.id} value={chapter.id} className="text-base">
                 {chapter.name}
               </SelectItem>
             ))}
@@ -90,10 +90,11 @@ export function SelectionForm() {
       </div>
       <Button
         type="submit"
-        className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
+        size="lg"
+        className="w-full text-lg"
         disabled={!selectedGrade || !selectedSubject || !selectedChapter}
       >
-        <BookOpen className="mr-2 h-4 w-4" />
+        <BookOpen className="mr-2 h-5 w-5" />
         અભ્યાસ શરૂ કરો
       </Button>
     </form>

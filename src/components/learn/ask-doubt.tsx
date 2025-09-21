@@ -19,7 +19,7 @@ interface AskDoubtProps {
 function SubmitButton() {
   const { pending } = useFormStatus();
   return (
-    <Button type="submit" disabled={pending} size="sm">
+    <Button type="submit" disabled={pending}>
       {pending ? (
         <>
           <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -46,11 +46,11 @@ export function AskDoubt({ chapter, formAction, state, isPending }: AskDoubtProp
 
   return (
     <div>
-      <h3 className="text-2xl font-bold font-headline mb-4 text-primary flex items-center">
+      <h3 className="text-xl font-bold font-headline mb-3 text-primary flex items-center">
         <HelpCircle className="mr-3 h-6 w-6" />
         શંકા પૂછો
       </h3>
-      <p className="mb-4 text-muted-foreground">
+      <p className="mb-4 text-muted-foreground text-sm">
         આ પ્રકરણ વિશે કોઈ પ્રશ્ન છે? અહીં પૂછો અને તરત જ AI-સંચાલિત જવાબ મેળવો.
       </p>
 
@@ -79,10 +79,10 @@ export function AskDoubt({ chapter, formAction, state, isPending }: AskDoubtProp
       )}
 
       {state.answer && !isPending && (
-         <Card className="mt-4 bg-background shadow-md border-primary/20">
+         <Card className="mt-6 bg-background shadow-inner">
           <CardContent className="p-4 space-y-3">
-             <p className="font-semibold text-sm text-primary-light">{state.question}</p>
-             <div className="border-t pt-3">
+             <p className="font-semibold text-sm text-primary">{state.question}</p>
+             <div className="border-t pt-3 mt-3">
                  <p className="text-sm whitespace-pre-wrap leading-relaxed text-foreground/90">{state.answer}</p>
              </div>
           </CardContent>
@@ -92,7 +92,7 @@ export function AskDoubt({ chapter, formAction, state, isPending }: AskDoubtProp
       {state.error && (
         <Card className="mt-4 bg-destructive/10 border-destructive">
           <CardContent className="p-4">
-            <p className="text-sm text-destructive">{state.error}</p>
+            <p className="text-sm text-destructive-foreground">{state.error}</p>
           </CardContent>
         </Card>
       )}

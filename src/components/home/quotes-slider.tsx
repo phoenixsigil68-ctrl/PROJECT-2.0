@@ -22,7 +22,7 @@ export function QuotesSlider() {
         {quotes.map((quote, index) => (
           <CarouselItem key={index}>
             <div className="p-1">
-              <Card className="bg-card/60 backdrop-blur-sm">
+              <Card className="bg-card/60 backdrop-blur-sm border-0 shadow-none">
                 <CardContent className="flex flex-col items-center justify-center p-6 text-center">
                   <blockquote className="text-lg md:text-xl font-medium text-foreground/80">
                     “{quote.text}”
