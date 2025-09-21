@@ -50,9 +50,9 @@ export default function Home() {
       </Card>
       
        <div className="z-10 mt-8">
-          <Button asChild variant="secondary" size="lg">
+          <Button asChild variant="outline" size="lg" className="border-primary/20 shadow-lg hover:shadow-primary/20 hover:bg-primary/5 transition-all duration-300">
             <Link href="/quiz-from-image">
-              <FileImage className="mr-2" />
+              <FileImage className="mr-2 text-primary" />
               છબીમાંથી ક્વિઝ બનાવો
             </Link>
           </Button>
