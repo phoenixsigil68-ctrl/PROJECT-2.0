@@ -53,7 +53,7 @@ export default function Home() {
           <Button asChild variant="outline" size="lg" className="border-primary/20 shadow-lg hover:shadow-primary/20 hover:bg-primary/5 transition-all duration-300">
             <Link href="/quiz-from-image">
               <FileImage className="mr-2 text-primary" />
-              છબીમાંથી ક્વિઝ બનાવો
+              Create Quiz with Image
             </Link>
           </Button>
         </div>
