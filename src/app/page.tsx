@@ -1,3 +1,4 @@
+
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SelectionForm } from '@/components/home/selection-form';
@@ -29,7 +30,7 @@ export default function Home() {
 
       <div className="z-10 text-center px-4 mb-8 mt-16">
         <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-4 animate-fade-in-down">
-          વિદ્યાર્થી સહાયક
+          ગુજરાતી વિદ્યાર્થી પોર્ટલ
         </h1>
         <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
           ધોરણ ૯-૧૨ના વિદ્યાર્થીઓ માટે એક સંપૂર્ણ શૈક્ષણિક પ્લેટફોર્મ.

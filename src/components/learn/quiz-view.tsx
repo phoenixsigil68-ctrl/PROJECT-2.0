@@ -46,7 +46,7 @@ export function QuizView({ chapter, grade, subject }: { chapter: Chapter; grade:
           <CardContent>
              <Button asChild variant="outline">
                 <Link href="/quiz-from-image">
-                    છબીમાંથી ક્વિઝ બનાવવા માટે અહીં જાઓ
+                    Create Quiz with Image
                 </Link>
              </Button>
           </CardContent>
