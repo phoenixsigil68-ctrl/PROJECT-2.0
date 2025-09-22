@@ -25,31 +25,32 @@ export function FlashcardCarousel({ flashcards }: { flashcards: GenerateFlashcar
       <CarouselContent>
         {flashcards.map((flashcard, index) => (
           <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-            <div className="p-1 h-full">
-              <div className="relative h-full" style={{ perspective: '1000px' }}>
+            <div className="p-1 h-full" style={{ perspective: '1000px' }}>
+              <div
+                className="relative w-full h-64 cursor-pointer transition-transform duration-700"
+                style={{
+                  transformStyle: 'preserve-3d',
+                  transform: flipped[index] ? 'rotateY(180deg)' : 'none',
+                }}
+                onClick={() => handleFlip(index)}
+              >
+                {/* Front of the card (Term) */}
                 <Card
-                  onClick={() => handleFlip(index)}
-                  className="w-full h-64 cursor-pointer transition-transform duration-700"
-                  style={{ transformStyle: 'preserve-3d', transform: flipped[index] ? 'rotateY(180deg)' : 'none' }}
+                  className="absolute w-full h-full flex items-center justify-center p-6 text-center"
+                  style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
                 >
-                  {/* Front of the card (Term) */}
-                  <div
-                    className="absolute w-full h-full flex items-center justify-center p-6 text-center"
-                    style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
-                  >
-                    <p className="text-xl font-semibold text-primary">{flashcard.term}</p>
-                  </div>
-                  {/* Back of the card (Definition) */}
-                  <div
-                    className="absolute w-full h-full flex items-center justify-center p-6 text-center bg-card"
-                    style={{
-                      backfaceVisibility: 'hidden',
-                      WebkitBackfaceVisibility: 'hidden',
-                      transform: 'rotateY(180deg)',
-                    }}
-                  >
-                    <p className="text-sm text-foreground">{flashcard.definition}</p>
-                  </div>
+                  <p className="text-xl font-semibold text-primary">{flashcard.term}</p>
+                </Card>
+                {/* Back of the card (Definition) */}
+                <Card
+                  className="absolute w-full h-full flex items-center justify-center p-6 text-center"
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                    transform: 'rotateY(180deg)',
+                  }}
+                >
+                  <p className="text-sm text-foreground">{flashcard.definition}</p>
                 </Card>
               </div>
             </div>
