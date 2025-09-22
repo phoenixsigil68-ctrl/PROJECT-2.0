@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
-import { ChatWidget } from '@/components/chatbot/chat-widget';
 import Image from 'next/image';
 import placeholderImages from '@/lib/placeholder-images.json';
 
@@ -42,7 +41,6 @@ export default function RootLayout({
                 {children}
             </div>
         </div>
-        <ChatWidget />
         <Toaster />
       </body>
     </html>
