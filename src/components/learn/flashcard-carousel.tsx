@@ -3,10 +3,8 @@
 import * as React from 'react';
 import { useState } from 'react';
 import type { GenerateFlashcardsOutput } from '@/ai/flows/generate-flashcards-flow';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card } from '@/components/ui/card';
 import { Carousel, CarouselContent, CarouselItem, CarouselNext, CarouselPrevious } from '@/components/ui/carousel';
-import { Button } from '../ui/button';
-import { RefreshCcw } from 'lucide-react';
 
 export function FlashcardCarousel({ flashcards }: { flashcards: GenerateFlashcardsOutput['flashcards'] }) {
   const [flipped, setFlipped] = useState<boolean[]>(Array(flashcards.length).fill(false));
@@ -37,19 +35,20 @@ export function FlashcardCarousel({ flashcards }: { flashcards: GenerateFlashcar
                   {/* Front of the card (Term) */}
                   <div
                     className="absolute w-full h-full flex items-center justify-center p-6 text-center"
-                    style={{ backfaceVisibility: 'hidden' }}
+                    style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
                   >
                     <p className="text-xl font-semibold text-primary">{flashcard.term}</p>
                   </div>
                   {/* Back of the card (Definition) */}
                   <div
-                    className="absolute w-full h-full flex items-center justify-center p-6 text-center bg-muted"
+                    className="absolute w-full h-full flex items-center justify-center p-6 text-center bg-card"
                     style={{
                       backfaceVisibility: 'hidden',
+                      WebkitBackfaceVisibility: 'hidden',
                       transform: 'rotateY(180deg)',
                     }}
                   >
-                    <p className="text-sm text-muted-foreground">{flashcard.definition}</p>
+                    <p className="text-sm text-foreground">{flashcard.definition}</p>
                   </div>
                 </Card>
               </div>
