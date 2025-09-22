@@ -29,6 +29,7 @@ export function ChatWidget() {
   const [state, formAction, isPending] = useActionState(chatAction, initialState);
   const formRef = useRef<HTMLFormElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -37,10 +38,11 @@ export function ChatWidget() {
         behavior: 'smooth',
       });
     }
-    if (!isPending) {
+    if (state.messages.length > initialState.messages.length) {
         formRef.current?.reset();
+        inputRef.current?.focus();
     }
-  }, [state.messages, isPending]);
+  }, [state.messages]);
 
   return (
     <>
@@ -105,6 +107,7 @@ export function ChatWidget() {
               <Input
                 id="message"
                 name="message"
+                ref={inputRef}
                 placeholder="તમારો પ્રશ્ન અહીં લખો..."
                 className="flex-1"
                 autoComplete="off"
