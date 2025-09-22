@@ -36,12 +36,10 @@ const chatFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async ({history}) => {
-    const latestMessage = history.pop()!;
-
     const response = await generate({
       model: googleAI.model('gemini-2.5-flash'),
       history: history,
-      prompt: latestMessage.content,
+      prompt: history[history.length-1].content,
       system: `You are a friendly and helpful AI assistant named "વિદ્યાર્થી મિત્ર" (Student Friend) for an educational platform called "વિદ્યાર્થી સહાયક" (Student Helper) for students in Gujarat, India (grades 9-12).
 
 Your primary language for conversation should be Gujarati, but you can use English for technical terms if needed.
