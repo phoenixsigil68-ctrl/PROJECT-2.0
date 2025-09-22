@@ -21,10 +21,10 @@ export default function LearnPage({ params }: { params: { slug: string[] } }) {
   }
 
   return (
-    <div className="min-h-screen bg-secondary/40">
+    <div className="min-h-screen">
       <div className="container mx-auto p-4 md:p-8">
         <LearningTracker />
-        <header className="flex items-center justify-between mb-6 bg-card p-4 rounded-xl shadow-sm border">
+        <header className="flex items-center justify-between mb-6 bg-card/80 p-4 rounded-xl shadow-lg border backdrop-blur-sm">
           <div>
             <p className="text-sm text-muted-foreground">
               {grade.name} - {subject.name}
@@ -40,7 +40,7 @@ export default function LearnPage({ params }: { params: { slug: string[] } }) {
         </header>
 
         <Tabs defaultValue="content" className="w-full">
-          <TabsList className="grid w-full grid-cols-1 md:grid-cols-3 md:w-fit mx-auto md:mx-0">
+          <TabsList className="grid w-full grid-cols-1 md:grid-cols-3 md:w-fit mx-auto md:mx-0 bg-card/80 backdrop-blur-sm border shadow-md">
             <TabsTrigger value="content">અભ્યાસક્રમ</TabsTrigger>
             <TabsTrigger value="flashcards">ફ્લેશકાર્ડ્સ</TabsTrigger>
             <TabsTrigger value="quiz">ક્વિઝ</TabsTrigger>

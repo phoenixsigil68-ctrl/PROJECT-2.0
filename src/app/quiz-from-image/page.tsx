@@ -5,9 +5,9 @@ import Link from 'next/link';
 
 export default function QuizFromImagePage() {
   return (
-    <div className="min-h-screen bg-secondary/40">
+    <div className="min-h-screen">
       <div className="container mx-auto p-4 md:p-8">
-        <header className="flex items-center justify-between mb-6 bg-card p-4 rounded-xl shadow-sm border">
+        <header className="flex items-center justify-between mb-6 bg-card/80 p-4 rounded-xl shadow-lg border backdrop-blur-sm">
           <div>
             <h1 className="text-2xl md:text-3xl font-bold font-headline text-primary">
               છબીમાંથી ક્વિઝ બનાવો
