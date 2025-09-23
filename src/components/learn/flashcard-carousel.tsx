@@ -37,7 +37,10 @@ export function FlashcardCarousel({ flashcards }: { flashcards: GenerateFlashcar
                 {/* Front of the card (Term) */}
                 <Card
                   className="absolute w-full h-full flex items-center justify-center p-6 text-center"
-                  style={{ backfaceVisibility: 'hidden', WebkitBackfaceVisibility: 'hidden' }}
+                  style={{
+                    backfaceVisibility: 'hidden',
+                    WebkitBackfaceVisibility: 'hidden',
+                  }}
                 >
                   <p className="text-xl font-semibold text-primary">{flashcard.term}</p>
                 </Card>
