@@ -9,6 +9,8 @@
  */
 
 import {ai} from '@/ai/genkit';
+import {googleAI} from '@genkit-ai/googleai';
+import {generate} from 'genkit';
 import {z} from 'genkit';
 
 const GenerateFlashcardsInputSchema = z.object({
@@ -31,11 +33,19 @@ export async function generateFlashcards(input: GenerateFlashcardsInput): Promis
   return generateFlashcardsFlow(input);
 }
 
-const prompt = ai.definePrompt({
-  name: 'generateFlashcardsPrompt',
-  input: {schema: GenerateFlashcardsInputSchema},
-  output: {schema: GenerateFlashcardsOutputSchema},
-  prompt: `You are an expert educator creating learning materials in Gujarati. Your task is to generate {{count}} flashcards from the following chapter content.
+const generateFlashcardsFlow = ai.defineFlow(
+  {
+    name: 'generateFlashcardsFlow',
+    inputSchema: GenerateFlashcardsInputSchema,
+    outputSchema: GenerateFlashcardsOutputSchema,
+  },
+  async ({chapterContent, count}) => {
+    const {output} = await generate({
+      model: googleAI.model('gemini-2.5-flash'),
+      output: {
+        schema: GenerateFlashcardsOutputSchema,
+      },
+      prompt: `You are an expert educator creating learning materials in Gujarati. Your task is to generate ${count} flashcards from the following chapter content.
 
 Each flashcard should consist of a key 'term' and a simple 'definition'. Both the term and definition must be in Gujarati.
 
@@ -43,21 +53,11 @@ Focus on the most important vocabulary, concepts, and formulas in the text.
 
 Chapter Content:
 ---
-{{{chapterContent}}}
+${chapterContent}
 ---
 
-Your response must be a JSON object with a "flashcards" array.
-`,
-});
-
-const generateFlashcardsFlow = ai.defineFlow(
-  {
-    name: 'generateFlashcardsFlow',
-    inputSchema: GenerateFlashcardsInputSchema,
-    outputSchema: GenerateFlashcardsOutputSchema,
-  },
-  async input => {
-    const {output} = await prompt(input);
+Your response must be a JSON object with a "flashcards" array.`,
+    });
     return output!;
   }
 );
