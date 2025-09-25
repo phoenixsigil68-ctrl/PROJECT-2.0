@@ -1,3 +1,4 @@
+
 'use server';
 
 /**
@@ -43,6 +44,26 @@ Your response must be a JSON object with a "questions" array. Each object in the
 Image Content:
 {{media url=imageDataUri}}
 `,
+  config: {
+    safetySettings: [
+        {
+            category: 'HARM_CATEGORY_DANGEROUS_CONTENT',
+            threshold: 'BLOCK_NONE',
+        },
+        {
+            category: 'HARM_CATEGORY_HARASSMENT',
+            threshold: 'BLOCK_NONE',
+        },
+        {
+            category: 'HARM_CATEGORY_HATE_SPEECH',
+            threshold: 'BLOCK_ONLY_HIGH',
+        },
+        {
+            category: 'HARM_CATEGORY_SEXUALLY_EXPLICIT',
+            threshold: 'BLOCK_ONLY_HIGH',
+        }
+    ]
+  }
 });
 
 const generateQuizFromImageFlow = ai.defineFlow(
