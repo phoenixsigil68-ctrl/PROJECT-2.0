@@ -8,6 +8,7 @@ import { DailyProgress } from '@/components/home/daily-progress';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FileImage } from 'lucide-react';
+import { GraduationCap } from 'lucide-react';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -29,7 +30,8 @@ export default function Home() {
       </div>
 
       <div className="z-10 text-center px-4 mb-8 mt-20 md:mt-16">
-        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-4 animate-fade-in-down">
+        <h1 className="text-4xl md:text-6xl font-headline font-bold text-primary mb-4 animate-fade-in-down flex items-center justify-center">
+          <GraduationCap className="w-12 h-12 mr-4" />
           વિદ્યાર્થી સહાયક
         </h1>
         <p className="text-lg md:text-xl text-foreground/80 max-w-2xl mx-auto">
@@ -37,11 +39,11 @@ export default function Home() {
         </p>
       </div>
       
-      <div className="w-full max-w-md z-10 mb-8">
+      <div className="w-full max-w-lg z-10 mb-8">
         <DailyProgress />
       </div>
 
-      <Card className="w-full max-w-md z-10 shadow-xl backdrop-blur-md bg-card/80 border">
+      <Card className="w-full max-w-lg z-10 shadow-xl backdrop-blur-md bg-card/80 border">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-headline">તમારો પાઠ પસંદ કરો</CardTitle>
         </CardHeader>
