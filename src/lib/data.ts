@@ -61,6 +61,11 @@ export const AppData: Grade[] = [
                 options: ['3.6', '0.36', '0.036', '36.0'],
                 correctAnswerIndex: 1,
               },
+              {
+                question: '√9 એ કેવી સંખ્યા છે?',
+                options: ['સંમેય', 'અસંમેય', 'અપૂર્ણાંક', 'ઋણ'],
+                correctAnswerIndex: 0,
+              },
             ],
           },
           {
@@ -153,7 +158,7 @@ export const AppData: Grade[] = [
         name: 'રસાયણ વિજ્ઞાન',
         chapters: [
           { id: 'chapter-1', name: 'પ્રકરણ ૧: રસાયણ વિજ્ઞાનની કેટલીક પાયાની સંકલ્પનાઓ', content: 'દ્રવ્યનું સ્વરૂપ અને રાસાયણિક સંયોગીકરણના નિયમો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
-          { id: 'chapter-2', name: 'પ્રકરણ ૨: પરમાણુનું બંધારણ', content: 'પરમાણુના બંધારણ અને ક્વોન્ટમ સિદ્ધાંત.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
+          { id_ 'chapter-2', name: 'પ્રકરણ ૨: પરમાણુનું બંધારણ', content: 'પરમાણુના બંધારણ અને ક્વોન્ટમ સિદ્ધાંત.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-3', name: 'પ્રકરણ ૩: તત્ત્વોનું વર્ગીકરણ અને ગુણધર્મોમાં આવર્તિતા', content: 'આવર્ત કોષ્ટક અને તત્ત્વોના ગુણધર્મો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-4', name: 'પ્રકરણ ૪: રાસાયણિક બંધન અને આણ્વીય રચના', content: 'રાસાયણિક બંધનના પ્રકારો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-5', name: 'પ્રકરણ ૫: દ્રવ્યની અવસ્થાઓ', content: 'દ્રવ્યની ઘન, પ્રવાહી અને વાયુ અવસ્થાઓ.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
@@ -185,7 +190,7 @@ export const AppData: Grade[] = [
           { id: 'chapter-1', name: 'પ્રકરણ ૧: સંબંધ અને વિધેય', content: 'સંબંધો અને વિધેયોના પ્રકારો અને સંયોજન.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-2', name: 'પ્રકરણ ૨: પ્રતિલોમ ત્રિકોણમિતીય વિધેયો', content: 'પ્રતિલોમ ત્રિકોણમિતીય વિધેયો અને તેમના ગુણધર્મો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-3', name: 'પ્રકરણ ૩: શ્રેણિક', content: 'શ્રેણિકના પ્રકારો અને તેમના પરની ક્રિયાઓ.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
-          { id: 'chapter-4', name: 'પ્રકરણ ૪: નિશ્ચાયક', content: 'નિશ્ચાયક અને તેના ગુણધર્મો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
+          { id: 'chapter-4', 'name': 'પ્રકરણ ૪: નિશ્ચાયક', content: 'નિશ્ચાયક અને તેના ગુણધર્મો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-5', name: 'પ્રકરણ ૫: સાતત્ય અને વિકલનીયતા', content: 'વિધેયોનું સાતત્ય અને વિકલનીયતા.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-6', name: 'પ્રકરણ ૬: વિકલિતના ઉપયોગો', content: 'વિકલનના ભૌમિતિક અને ભૌતિક અર્થઘટન.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
         ],
