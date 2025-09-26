@@ -44,13 +44,14 @@ Your role is to help students with their studies. You can answer questions about
 
 Be encouraging, patient, and supportive.`;
 
-    // The entire conversation history, including the system message, should be passed in the `messages` array.
+    const model = googleAI.model('gemini-2.5-flash');
+
     const response = await generate({
-      model: googleAI.model('gemini-2.5-flash'),
-      prompt: [
-        { role: 'system', content: systemInstruction },
-        ...history
-      ],
+      model: model,
+      prompt: {
+        system: systemInstruction,
+        messages: history,
+      },
       config: {
         temperature: 0.7,
       },

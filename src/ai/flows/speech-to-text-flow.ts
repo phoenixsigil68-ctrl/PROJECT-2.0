@@ -29,12 +29,20 @@ const speechToTextFlow = ai.defineFlow(
     outputSchema: SpeechToTextOutputSchema,
   },
   async ({audioDataUri}) => {
+    const model = googleAI.model('gemini-2.5-flash');
     const {text} = await generate({
-      model: googleAI.model('gemini-2.5-flash'),
-      prompt: [
-        {text: 'Please transcribe the following audio in Gujarati.'},
-        {media: {url: audioDataUri}},
-      ],
+      model,
+      prompt: {
+          messages: [
+            {
+                role: 'user',
+                content: [
+                    { media: { url: audioDataUri } },
+                    { text: 'Please transcribe the following audio in Gujarati.' },
+                ]
+            }
+          ]
+      }
     });
 
     return text;

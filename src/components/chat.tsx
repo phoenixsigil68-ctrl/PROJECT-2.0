@@ -32,6 +32,7 @@ export function Chat() {
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
   const [isRecording, setIsRecording] = useState(false);
+  const [isTranscribing, setIsTranscribing] = useState(false);
   const [playingAudio, setPlayingAudio] = useState<string | null>(null);
   const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const { toast } = useToast();
@@ -53,6 +54,7 @@ export function Chat() {
     if (isRecording) {
       mediaRecorderRef.current?.stop();
       setIsRecording(false);
+      setIsTranscribing(true);
       return;
     }
 
@@ -79,6 +81,8 @@ export function Chat() {
              }
           } catch (e) {
             toast({ variant: 'destructive', title: 'ભૂલ', description: 'ઓડિયોનું લખાણ કરવામાં નિષ્ફળ.' });
+          } finally {
+            setIsTranscribing(false);
           }
         };
         stream.getTracks().forEach(track => track.stop());
@@ -95,6 +99,8 @@ export function Chat() {
   const handlePlayAudio = async (text: string, messageId: string) => {
     if (playingAudio === messageId) {
       setPlayingAudio(null);
+      // In a real app, you'd want to stop the audio here.
+      // new Audio() doesn't give us an easy way to do that without more state.
       return;
     }
     setPlayingAudio(messageId);
@@ -156,13 +162,19 @@ export function Chat() {
                     </div>
                 </div>
             )}
+            {isTranscribing && (
+                <div className="flex justify-center items-center text-muted-foreground text-sm">
+                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+                    <span>લખાણ કરી રહ્યું છે...</span>
+                </div>
+            )}
           </div>
         </ScrollArea>
       </CardContent>
       <CardFooter>
         <form ref={formRef} action={formAction} className="flex w-full items-center space-x-2">
           <Input name="message" ref={inputRef} placeholder="તમારો પ્રશ્ન લખો..." className="flex-1" autoComplete="off" />
-          <Button type="button" size="icon" variant={isRecording ? "destructive" : "outline"} onClick={handleMicClick}>
+          <Button type="button" size="icon" variant={isRecording ? "destructive" : "outline"} onClick={handleMicClick} disabled={isTranscribing}>
             {isRecording ? <Square className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
             <span className="sr-only">{isRecording ? 'રેકોર્ડિંગ બંધ કરો' : 'બોલવાનું શરૂ કરો'}</span>
           </Button>
