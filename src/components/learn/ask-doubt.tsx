@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
@@ -37,12 +37,6 @@ function SubmitButton() {
 
 export function AskDoubt({ chapter, formAction, state, isPending }: AskDoubtProps) {
   const formRef = useRef<HTMLFormElement>(null);
-
-  useEffect(() => {
-    if (!isPending) {
-        formRef.current?.reset();
-    }
-  }, [isPending]);
 
   return (
     <div>
