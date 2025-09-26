@@ -3,6 +3,7 @@ import './globals.css';
 import { Toaster } from '@/components/ui/toaster';
 import Image from 'next/image';
 import placeholderImages from '@/lib/placeholder-images.json';
+import { FloatingChat } from '@/components/floating-chat';
 
 export const metadata: Metadata = {
   title: 'વિદ્યાર્થી સહાયક',
@@ -42,6 +43,7 @@ export default function RootLayout({
             </div>
         </div>
         <Toaster />
+        <FloatingChat />
       </body>
     </html>
   );

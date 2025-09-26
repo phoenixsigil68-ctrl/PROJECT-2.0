@@ -7,7 +7,6 @@ import { DailyProgress } from '@/components/home/daily-progress';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { FileImage, GraduationCap } from 'lucide-react';
-import { Chat } from '@/components/chat';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -59,10 +58,6 @@ export default function Home() {
               Create Quiz with Image
             </Link>
           </Button>
-        </div>
-        
-        <div className="lg:col-span-2">
-            <Chat/>
         </div>
 
         <div className="w-full lg:col-span-2 z-10 my-8">
