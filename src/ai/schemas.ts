@@ -9,3 +9,20 @@ export const MultipleChoiceQuestionSchema = z.object({
 export const GenerateQuizQuestionsOutputSchema = z.object({
   questions: z.array(MultipleChoiceQuestionSchema).describe('An array of multiple-choice questions.'),
 });
+
+// STT Schemas
+export const SpeechToTextInputSchema = z.object({
+  audioDataUri: z
+    .string()
+    .describe(
+      "The user's speech as an audio data URI. Expected format: 'data:<mimetype>;base64,<encoded_data>'."
+    ),
+});
+export const SpeechToTextOutputSchema = z.string();
+
+
+// TTS Schemas
+export const TextToSpeechInputSchema = z.string();
+export const TextToSpeechOutputSchema = z.object({
+  audioDataUri: z.string().describe('The generated audio as a WAV data URI.'),
+});

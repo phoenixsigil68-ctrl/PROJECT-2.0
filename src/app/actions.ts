@@ -7,7 +7,8 @@ import { askDoubt } from '@/ai/flows/ask-doubt-flow';
 import { generateFlashcards, type GenerateFlashcardsOutput } from '@/ai/flows/generate-flashcards-flow';
 import { summarizeContent } from '@/ai/flows/summarize-content-flow';
 import { generateQuizFromImage, type GenerateQuizFromImageOutput } from '@/ai/flows/generate-quiz-from-image-flow';
-
+import { speechToText } from '@/ai/flows/speech-to-text-flow';
+import { textToSpeech } from '@/ai/flows/text-to-speech-flow';
 
 export type CreateQuizState = {
   formKey: number;
@@ -180,4 +181,25 @@ export async function createQuizFromImageAction(
         const message = error instanceof Error ? error.message : 'એક અજ્ઞાત ભૂલ આવી.';
         return { ...prevState, success: false, message: `ક્વિઝ બનાવવામાં નિષ્ફળ: ${message}` };
     }
+}
+
+
+export async function speechToTextAction(audioDataUri: string): Promise<string> {
+  try {
+    const transcription = await speechToText({ audioDataUri });
+    return transcription;
+  } catch (error) {
+    console.error('STT Action Error:', error);
+    return '';
+  }
+}
+
+export async function textToSpeechAction(text: string): Promise<string | null> {
+  try {
+    const { audioDataUri } = await textToSpeech(text);
+    return audioDataUri;
+  } catch (error) {
+    console.error('TTS Action Error:', error);
+    return null;
+  }
 }

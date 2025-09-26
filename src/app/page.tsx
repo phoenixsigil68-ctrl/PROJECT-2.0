@@ -1,4 +1,3 @@
-
 import Image from 'next/image';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { SelectionForm } from '@/components/home/selection-form';
@@ -7,8 +6,8 @@ import { QuotesSlider } from '@/components/home/quotes-slider';
 import { DailyProgress } from '@/components/home/daily-progress';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileImage } from 'lucide-react';
-import { GraduationCap } from 'lucide-react';
+import { FileImage, GraduationCap } from 'lucide-react';
+import { Chat } from '@/components/chat';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -38,21 +37,22 @@ export default function Home() {
           ધોરણ ૯-૧૨ના વિદ્યાર્થીઓ માટે એક સંપૂર્ણ શૈક્ષણિક પ્લેટફોર્મ.
         </p>
       </div>
-      
-      <div className="w-full max-w-xl z-10 mb-8">
-        <DailyProgress />
-      </div>
 
-      <Card className="w-full max-w-xl z-10 backdrop-blur-md bg-card/80">
-        <CardHeader>
-          <CardTitle className="text-center text-2xl font-headline">તમારો પાઠ પસંદ કરો</CardTitle>
-        </CardHeader>
-        <CardContent>
-          <SelectionForm />
-        </CardContent>
-      </Card>
-      
-       <div className="z-10 mt-8">
+      <div className="w-full max-w-xl z-10 mb-8 grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="lg:col-span-2">
+            <DailyProgress />
+        </div>
+        
+        <Card className="w-full backdrop-blur-md bg-card/80 lg:col-span-2">
+            <CardHeader>
+            <CardTitle className="text-center text-2xl font-headline">તમારો પાઠ પસંદ કરો</CardTitle>
+            </CardHeader>
+            <CardContent>
+            <SelectionForm />
+            </CardContent>
+        </Card>
+        
+        <div className="lg:col-span-2 flex justify-center">
           <Button asChild variant="outline" size="lg" className="shadow-lg hover:shadow-primary/20 hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1">
             <Link href="/quiz-from-image">
               <FileImage className="mr-2 text-primary" />
@@ -60,9 +60,14 @@ export default function Home() {
             </Link>
           </Button>
         </div>
+        
+        <div className="lg:col-span-2">
+            <Chat/>
+        </div>
 
-      <div className="w-full max-w-4xl z-10 mt-12 mb-8">
-         <QuotesSlider />
+        <div className="w-full lg:col-span-2 z-10 my-8">
+            <QuotesSlider />
+        </div>
       </div>
 
       <footer className="z-10 text-center text-muted-foreground text-sm py-4">
