@@ -10,19 +10,8 @@ import Link from 'next/link';
 import { AskDoubt } from './ask-doubt';
 import { Separator } from '../ui/separator';
 import { ContentSummarizer } from './content-summarizer';
-import { useActionState } from 'react';
-import { askDoubtAction, type AskDoubtState } from '@/app/actions';
-
-const initialAskDoubtState: AskDoubtState = {
-  formKey: 0,
-  question: '',
-  answer: null,
-};
-
 
 export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, grade: Grade, subject: Subject }) {
-  const [askDoubtState, askDoubtFormAction, isAskDoubtPending] = useActionState(askDoubtAction, initialAskDoubtState);
-  
   const chapterImage = placeholderImages.placeholderImages.find(img => img.id === chapter.imageUrl);
   const youtubeSearchQuery = encodeURIComponent(`${grade.name} ${subject.name} ${chapter.name}`);
   const youtubeSearchUrl = `https://www.youtube.com/results?search_query=${youtubeSearchQuery}`;
@@ -37,12 +26,7 @@ export function ContentDisplay({ chapter, grade, subject }: { chapter: Chapter, 
         </Card>
         <Card>
             <CardContent className="p-6">
-                <AskDoubt 
-                    chapter={chapter} 
-                    formAction={askDoubtFormAction}
-                    state={askDoubtState}
-                    isPending={isAskDoubtPending}
-                />
+                <AskDoubt chapter={chapter} />
             </CardContent>
         </Card>
         <Card>
