@@ -2,6 +2,38 @@ import type { Grade } from './types';
 
 export const AppData: Grade[] = [
   {
+    id: '8',
+    name: 'ધોરણ ૮',
+    subjects: [
+      {
+        id: 'maths',
+        name: 'ગણિત',
+        chapters: [
+          {
+            id: 'chapter-1',
+            name: 'પ્રકરણ ૧: સંમેય સંખ્યાઓ',
+            content: 'આ પ્રકરણમાં સંમેય સંખ્યાઓના ગુણધર્મો અને સંખ્યા રેખા પર તેમના નિરૂપણનો અભ્યાસ કરીશું.',
+            textbookUrl: 'https://www.selfstudys.com/',
+            quiz: [],
+          },
+        ],
+      },
+      {
+        id: 'science',
+        name: 'વિજ્ઞાન',
+        chapters: [
+          {
+            id: 'chapter-1',
+            name: 'પ્રકરણ ૧: પાક ઉત્પાદન અને વ્યવસ્થાપન',
+            content: 'આ પ્રકરણમાં આપણે ખેતીની પદ્ધતિઓ, પાક ઉત્પાદન અને તેના વ્યવસ્થાપન વિશે શીખીશું.',
+            textbookUrl: 'https://www.selfstudys.com/',
+            quiz: [],
+          },
+        ],
+      },
+    ],
+  },
+  {
     id: '9',
     name: 'ધોરણ ૯',
     subjects: [
