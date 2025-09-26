@@ -43,7 +43,7 @@ export default function Home() {
         <DailyProgress />
       </div>
 
-      <Card className="w-full max-w-xl z-10 shadow-2xl backdrop-blur-md bg-card/80 border-2 border-accent rounded-2xl">
+      <Card className="w-full max-w-xl z-10 backdrop-blur-md bg-card/80">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-headline">તમારો પાઠ પસંદ કરો</CardTitle>
         </CardHeader>
