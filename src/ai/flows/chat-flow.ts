@@ -9,11 +9,10 @@
  */
 
 import {ai} from '@/ai/genkit';
-import {generate} from 'genkit';
 import {z} from 'genkit';
 
 const ChatInputSchema = z.object({
-  message: z.string(),
+  message: z.string().describe("The user's message to the chatbot."),
 });
 export type ChatInput = z.infer<typeof ChatInputSchema>;
 
@@ -23,32 +22,30 @@ export async function chat(input: ChatInput): Promise<ChatOutput> {
   return chatFlow(input);
 }
 
-const chatFlow = ai.defineFlow(
-  {
-    name: 'chatFlow',
-    inputSchema: ChatInputSchema,
-    outputSchema: z.string(),
-  },
-  async ({message}) => {
-    const prompt = `You are a friendly and helpful AI assistant named "વિદ્યાર્થી મિત્ર" (Student Friend) for an educational platform called "વિદ્યાર્થી સહાયક" (Student Helper) for students in Gujarat, India (grades 9-12).
+const prompt = ai.definePrompt({
+  name: 'chatPrompt',
+  input: {schema: ChatInputSchema},
+  output: {format: 'text'},
+  prompt: `You are a friendly and helpful AI assistant named "વિદ્યાર્થી મિત્ર" (Student Friend) for an educational platform called "વિદ્યાર્થી સહાયક" (Student Helper) for students in Gujarat, India (grades 9-12).
 
 Your primary language for conversation should be Gujarati, but you can use English for technical terms if needed.
 
 Your role is to help students with their studies. You can answer questions about the subjects available on the platform (Maths, Science, Physics, Chemistry), explain concepts, and help them with their homework. Be encouraging, patient, and supportive.
 
 The user has asked the following question:
-"${message}"
+"{{message}}"
 
-Provide a direct and helpful answer.`;
+Provide a direct and helpful answer.`,
+});
 
-    const response = await generate({
-      model: 'googleai/gemini-2.5-flash',
-      prompt: prompt,
-      config: {
-        temperature: 0.7,
-      },
-    });
-
-    return response.text;
+const chatFlow = ai.defineFlow(
+  {
+    name: 'chatFlow',
+    inputSchema: ChatInputSchema,
+    outputSchema: z.string(),
+  },
+  async input => {
+    const {output} = await prompt(input);
+    return output!;
   }
 );
