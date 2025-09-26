@@ -14,6 +14,7 @@ import { useToast } from '@/hooks/use-toast';
 const initialChatState: ChatState = {
   formKey: 0,
   messages: [],
+  error: undefined,
 };
 
 function SubmitButton() {
