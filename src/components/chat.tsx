@@ -42,7 +42,6 @@ export function Chat() {
   useEffect(() => {
     // Reset form and focus input when the formKey changes (on successful submission)
     if (state.formKey > 0) {
-      formRef.current?.reset();
       inputRef.current?.focus();
     }
   }, [state.formKey]);
@@ -70,13 +69,13 @@ export function Chat() {
               <div
                 key={index}
                 className={cn(
-                  'flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm break-words',
+                  'flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm',
                   message.role === 'user'
                     ? 'ml-auto bg-primary text-primary-foreground'
                     : 'bg-muted'
                 )}
               >
-                <p>{message.content}</p>
+                <p className="whitespace-pre-wrap break-words">{message.content}</p>
               </div>
             ))}
              {isPending && (
