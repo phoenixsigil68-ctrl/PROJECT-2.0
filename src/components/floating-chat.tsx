@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { Chat } from '@/components/chat';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
 
 export function FloatingChat() {
   const [isOpen, setIsOpen] = useState(false);
@@ -24,6 +24,10 @@ export function FloatingChat() {
 
       <Dialog open={isOpen} onOpenChange={setIsOpen}>
         <DialogContent className="sm:max-w-[425px] p-0 border-0">
+           <DialogHeader className="sr-only">
+            <DialogTitle>વિદ્યાર્થી મિત્ર</DialogTitle>
+            <DialogDescription>તમારા અભ્યાસમાં મદદ માટે અહીં પૂછો.</DialogDescription>
+           </DialogHeader>
            {/* The Chat component includes its own header and footer, so we can render it directly */}
            <Chat />
         </DialogContent>
