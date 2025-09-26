@@ -44,6 +44,7 @@ export async function createQuizAction(
 }
 
 export type ChatState = {
+  formKey: number;
   messages: { role: 'user' | 'model'; content: string }[];
   error?: string;
 };
@@ -57,17 +58,24 @@ export async function chatAction(
     return { ...prevState, error: 'Message is required' };
   }
 
-  const newHistory = [...prevState.messages, { role: 'user' as const, content: userInput }];
+  const userMessage = { role: 'user' as const, content: userInput };
 
   try {
     const response = await chat({
-      history: newHistory,
+      message: userInput,
     });
-    return { messages: [...newHistory, { role: 'model' as const, content: response }] };
+    return { 
+        formKey: prevState.formKey + 1,
+        messages: [userMessage, { role: 'model' as const, content: response }] 
+    };
   } catch (error) {
     console.error(error);
     const message = error instanceof Error ? error.message : 'An unknown error occurred.';
-    return { messages: newHistory, error: `Failed to get response: ${message}` };
+    return { 
+        ...prevState,
+        messages: [userMessage],
+        error: `Failed to get response: ${message}` 
+    };
   }
 }
 

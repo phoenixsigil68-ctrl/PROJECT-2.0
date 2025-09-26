@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useActionState, useEffect, useRef } from 'react';
@@ -13,6 +12,7 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 
 const initialChatState: ChatState = {
+  formKey: 0,
   messages: [],
 };
 
@@ -40,11 +40,12 @@ export function Chat() {
   }, [state.error, toast]);
 
   useEffect(() => {
-    if (!isPending) {
+    // Reset form and focus input when the formKey changes (on successful submission)
+    if (state.formKey > 0) {
       formRef.current?.reset();
       inputRef.current?.focus();
     }
-  }, [isPending]);
+  }, [state.formKey]);
   
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -92,7 +93,7 @@ export function Chat() {
         </ScrollArea>
       </CardContent>
       <CardFooter>
-        <form ref={formRef} action={formAction} className="flex w-full items-center space-x-2">
+        <form ref={formRef} key={state.formKey} action={formAction} className="flex w-full items-center space-x-2">
           <Input name="message" ref={inputRef} placeholder="તમારો પ્રશ્ન લખો..." className="flex-1" autoComplete="off" />
           <SubmitButton />
         </form>
