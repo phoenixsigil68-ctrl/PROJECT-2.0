@@ -43,14 +43,14 @@ Your primary language for conversation should be Gujarati, but you can use Engli
 Your role is to help students with their studies. You can answer questions about the subjects available on the platform (Maths, Science, Physics, Chemistry), explain concepts, and help them with their homework.
 
 Be encouraging, patient, and supportive.`;
-    
+
+    // The entire conversation history, including the system message, should be passed in the `messages` array.
     const response = await generate({
       model: googleAI.model('gemini-2.5-flash'),
-      prompt: {
-        system: systemInstruction,
-        history: history.slice(0, -1),
-        messages: history.slice(-1),
-      },
+      prompt: [
+        { role: 'system', content: systemInstruction },
+        ...history
+      ],
       config: {
         temperature: 0.7,
       },
