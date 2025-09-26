@@ -39,11 +39,11 @@ export default function Home() {
         </p>
       </div>
       
-      <div className="w-full max-w-lg z-10 mb-8">
+      <div className="w-full max-w-xl z-10 mb-8">
         <DailyProgress />
       </div>
 
-      <Card className="w-full max-w-lg z-10 shadow-xl backdrop-blur-md bg-card/80 border">
+      <Card className="w-full max-w-xl z-10 shadow-2xl backdrop-blur-md bg-card/80 border-2 border-accent rounded-2xl">
         <CardHeader>
           <CardTitle className="text-center text-2xl font-headline">તમારો પાઠ પસંદ કરો</CardTitle>
         </CardHeader>
