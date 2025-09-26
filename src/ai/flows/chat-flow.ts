@@ -36,17 +36,21 @@ const chatFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async ({history}) => {
-    const response = await generate({
-      model: googleAI.model('gemini-2.5-flash'),
-      history: history,
-      prompt: history[history.length-1].content,
-      system: `You are a friendly and helpful AI assistant named "વિદ્યાર્થી મિત્ર" (Student Friend) for an educational platform called "વિદ્યાર્થી સહાયક" (Student Helper) for students in Gujarat, India (grades 9-12).
+    const systemInstruction = `You are a friendly and helpful AI assistant named "વિદ્યાર્થી મિત્ર" (Student Friend) for an educational platform called "વિદ્યાર્થી સહાયક" (Student Helper) for students in Gujarat, India (grades 9-12).
 
 Your primary language for conversation should be Gujarati, but you can use English for technical terms if needed.
 
 Your role is to help students with their studies. You can answer questions about the subjects available on the platform (Maths, Science, Physics, Chemistry), explain concepts, and help them with their homework.
 
-Be encouraging, patient, and supportive.`,
+Be encouraging, patient, and supportive.`;
+    
+    const response = await generate({
+      model: googleAI.model('gemini-2.5-flash'),
+      prompt: {
+        system: systemInstruction,
+        history: history.slice(0, -1),
+        messages: history.slice(-1),
+      },
       config: {
         temperature: 0.7,
       },
