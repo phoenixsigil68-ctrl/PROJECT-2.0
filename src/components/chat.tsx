@@ -1,13 +1,13 @@
 
 'use client';
 
-import { useActionState, useEffect, useRef, useState } from 'react';
+import { useActionState, useEffect, useRef } from 'react';
 import { useFormStatus } from 'react-dom';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
-import { chatAction, speechToTextAction, textToSpeechAction, type ChatState } from '@/app/actions';
-import { Loader2, Mic, Send, Bot, User, Volume2, Square } from 'lucide-react';
+import { chatAction, type ChatState } from '@/app/actions';
+import { Loader2, Send, Bot } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
@@ -31,11 +31,13 @@ export function Chat() {
   const formRef = useRef<HTMLFormElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const scrollAreaRef = useRef<HTMLDivElement>(null);
-  const [isRecording, setIsRecording] = useState(false);
-  const [isTranscribing, setIsTranscribing] = useState(false);
-  const [playingAudio, setPlayingAudio] = useState<string | null>(null);
-  const mediaRecorderRef = useRef<MediaRecorder | null>(null);
   const { toast } = useToast();
+
+  useEffect(() => {
+    if (state.error) {
+        toast({ variant: 'destructive', title: 'Chat Error', description: state.error });
+    }
+  }, [state.error, toast]);
 
   useEffect(() => {
     if (!isPending) {
@@ -50,75 +52,6 @@ export function Chat() {
     }
   }, [state.messages]);
 
-  const handleMicClick = async () => {
-    if (isRecording) {
-      mediaRecorderRef.current?.stop();
-      setIsRecording(false);
-      setIsTranscribing(true);
-      return;
-    }
-
-    try {
-      const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-      const recorder = new MediaRecorder(stream);
-      mediaRecorderRef.current = recorder;
-      const audioChunks: Blob[] = [];
-
-      recorder.ondataavailable = (event) => {
-        audioChunks.push(event.data);
-      };
-
-      recorder.onstop = async () => {
-        const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
-        const reader = new FileReader();
-        reader.readAsDataURL(audioBlob);
-        reader.onloadend = async () => {
-          const base64Audio = reader.result as string;
-          try {
-            const transcription = await speechToTextAction(base64Audio);
-             if (inputRef.current) {
-               inputRef.current.value = transcription;
-             }
-          } catch (e) {
-            toast({ variant: 'destructive', title: 'ભૂલ', description: 'ઓડિયોનું લખાણ કરવામાં નિષ્ફળ.' });
-          } finally {
-            setIsTranscribing(false);
-          }
-        };
-        stream.getTracks().forEach(track => track.stop());
-      };
-
-      recorder.start();
-      setIsRecording(true);
-    } catch (error) {
-      console.error("Microphone access denied:", error);
-      toast({ variant: 'destructive', title: 'માઇક્રોફોન ભૂલ', description: 'માઇક્રોફોનની ઍક્સેસ નકારવામાં આવી.' });
-    }
-  };
-  
-  const handlePlayAudio = async (text: string, messageId: string) => {
-    if (playingAudio === messageId) {
-      setPlayingAudio(null);
-      // In a real app, you'd want to stop the audio here.
-      // new Audio() doesn't give us an easy way to do that without more state.
-      return;
-    }
-    setPlayingAudio(messageId);
-    try {
-      const audioDataUri = await textToSpeechAction(text);
-      if (audioDataUri) {
-        const audio = new Audio(audioDataUri);
-        audio.play();
-        audio.onended = () => setPlayingAudio(null);
-      } else {
-        setPlayingAudio(null);
-        toast({ variant: 'destructive', title: 'ભૂલ', description: 'ઓડિયો ચલાવવામાં નિષ્ફળ.' });
-      }
-    } catch (e) {
-      setPlayingAudio(null);
-      toast({ variant: 'destructive', title: 'ભૂલ', description: 'ઓડિયો બનાવવામાં નિષ્ફળ.' });
-    }
-  };
 
   return (
     <Card className="w-full max-w-lg mx-auto">
@@ -142,14 +75,7 @@ export function Chat() {
                     : 'bg-muted'
                 )}
               >
-                <div className="flex items-center gap-2">
-                   {message.role === 'model' && (
-                     <Button variant="ghost" size="icon" className="h-6 w-6" onClick={() => handlePlayAudio(message.content, `msg-${index}`)}>
-                       {playingAudio === `msg-${index}` ? <Loader2 className="h-4 w-4 animate-spin"/> : <Volume2 className="h-4 w-4" />}
-                     </Button>
-                   )}
-                  <p>{message.content}</p>
-                </div>
+                <p>{message.content}</p>
               </div>
             ))}
              {isPending && (
@@ -162,22 +88,12 @@ export function Chat() {
                     </div>
                 </div>
             )}
-            {isTranscribing && (
-                <div className="flex justify-center items-center text-muted-foreground text-sm">
-                    <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    <span>લખાણ કરી રહ્યું છે...</span>
-                </div>
-            )}
           </div>
         </ScrollArea>
       </CardContent>
       <CardFooter>
         <form ref={formRef} action={formAction} className="flex w-full items-center space-x-2">
           <Input name="message" ref={inputRef} placeholder="તમારો પ્રશ્ન લખો..." className="flex-1" autoComplete="off" />
-          <Button type="button" size="icon" variant={isRecording ? "destructive" : "outline"} onClick={handleMicClick} disabled={isTranscribing}>
-            {isRecording ? <Square className="h-4 w-4" /> : <Mic className="h-4 w-4" />}
-            <span className="sr-only">{isRecording ? 'રેકોર્ડિંગ બંધ કરો' : 'બોલવાનું શરૂ કરો'}</span>
-          </Button>
           <SubmitButton />
         </form>
       </CardFooter>
