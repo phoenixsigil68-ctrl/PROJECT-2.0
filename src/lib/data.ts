@@ -158,7 +158,7 @@ export const AppData: Grade[] = [
         name: 'રસાયણ વિજ્ઞાન',
         chapters: [
           { id: 'chapter-1', name: 'પ્રકરણ ૧: રસાયણ વિજ્ઞાનની કેટલીક પાયાની સંકલ્પનાઓ', content: 'દ્રવ્યનું સ્વરૂપ અને રાસાયણિક સંયોગીકરણના નિયમો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
-          { id_ 'chapter-2', name: 'પ્રકરણ ૨: પરમાણુનું બંધારણ', content: 'પરમાણુના બંધારણ અને ક્વોન્ટમ સિદ્ધાંત.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
+          { id: 'chapter-2', name: 'પ્રકરણ ૨: પરમાણુનું બંધારણ', content: 'પરમાણુના બંધારણ અને ક્વોન્ટમ સિદ્ધાંત.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-3', name: 'પ્રકરણ ૩: તત્ત્વોનું વર્ગીકરણ અને ગુણધર્મોમાં આવર્તિતા', content: 'આવર્ત કોષ્ટક અને તત્ત્વોના ગુણધર્મો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-4', name: 'પ્રકરણ ૪: રાસાયણિક બંધન અને આણ્વીય રચના', content: 'રાસાયણિક બંધનના પ્રકારો.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
           { id: 'chapter-5', name: 'પ્રકરણ ૫: દ્રવ્યની અવસ્થાઓ', content: 'દ્રવ્યની ઘન, પ્રવાહી અને વાયુ અવસ્થાઓ.', textbookUrl: 'https://www.selfstudys.com/', quiz: [] },
