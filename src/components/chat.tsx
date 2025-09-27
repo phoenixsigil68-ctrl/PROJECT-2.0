@@ -69,7 +69,7 @@ export function Chat() {
               <div
                 key={index}
                 className={cn(
-                  'flex max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm',
+                  'flex w-max max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm',
                   message.role === 'user'
                     ? 'ml-auto bg-primary text-primary-foreground'
                     : 'bg-muted'
@@ -96,6 +96,7 @@ export function Chat() {
       <CardFooter>
         <form ref={formRef} key={state.formKey} action={formAction} className="flex w-full items-center space-x-2">
           <Input name="message" ref={inputRef} placeholder="તમારો પ્રશ્ન લખો..." className="flex-1" autoComplete="off" />
+          <SubmitButton />
         </form>
       </CardFooter>
     </Card>
