@@ -10,6 +10,7 @@ import { Loader2, Send, Bot } from 'lucide-react';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from './ui/card';
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
+import { Message } from 'genkit';
 
 const initialChatState: ChatState = {
   formKey: 0,
@@ -41,7 +42,6 @@ export function Chat() {
   }, [state.error, toast]);
 
   useEffect(() => {
-    // Reset form and focus input when the formKey changes (on successful submission)
     if (state.formKey > 0) {
       inputRef.current?.focus();
     }
@@ -52,7 +52,6 @@ export function Chat() {
       scrollAreaRef.current.scrollTo({ top: scrollAreaRef.current.scrollHeight, behavior: 'smooth' });
     }
   }, [state.messages]);
-
 
   return (
     <Card className="w-full max-w-lg mx-auto">
@@ -76,7 +75,9 @@ export function Chat() {
                     : 'bg-muted'
                 )}
               >
-                <p className="whitespace-pre-wrap break-words">{message.content}</p>
+                <p className="whitespace-pre-wrap break-words">
+                    {message.content.map((part, i) => part.text).join('')}
+                </p>
               </div>
             ))}
              {isPending && (
@@ -95,7 +96,6 @@ export function Chat() {
       <CardFooter>
         <form ref={formRef} key={state.formKey} action={formAction} className="flex w-full items-center space-x-2">
           <Input name="message" ref={inputRef} placeholder="તમારો પ્રશ્ન લખો..." className="flex-1" autoComplete="off" />
-          <SubmitButton />
         </form>
       </CardFooter>
     </Card>

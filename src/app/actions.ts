@@ -7,7 +7,7 @@ import { askDoubt } from '@/ai/flows/ask-doubt-flow';
 import { generateFlashcards, type GenerateFlashcardsOutput } from '@/ai/flows/generate-flashcards-flow';
 import { summarizeContent } from '@/ai/flows/summarize-content-flow';
 import { generateQuizFromImage, type GenerateQuizFromImageOutput } from '@/ai/flows/generate-quiz-from-image-flow';
-
+import {type Message} from 'genkit';
 
 export type CreateQuizState = {
   formKey: number;
@@ -45,7 +45,7 @@ export async function createQuizAction(
 
 export type ChatState = {
   formKey: number;
-  messages: { role: 'user' | 'model'; content: string }[];
+  messages: Message[];
   error?: string;
 };
 
@@ -58,23 +58,27 @@ export async function chatAction(
     return { ...prevState, error: 'Message is required' };
   }
 
-  const userMessage = { role: 'user' as const, content: userInput };
+  const history = prevState.messages || [];
+  const newUserMessage: Message = { role: 'user', content: [{text: userInput}] };
+  const newHistory = [...history, newUserMessage];
 
   try {
     const response = await chat({
+      history: newHistory,
       message: userInput,
     });
-    return { 
-        formKey: prevState.formKey + 1,
-        messages: [userMessage, { role: 'model' as const, content: response }] 
+    const modelResponse: Message = { role: 'model', content: [{text: response}]};
+    return {
+      formKey: prevState.formKey + 1,
+      messages: [...newHistory, modelResponse],
     };
   } catch (error) {
     console.error(error);
     const message = error instanceof Error ? error.message : 'An unknown error occurred.';
-    return { 
-        ...prevState,
-        messages: [userMessage],
-        error: `Failed to get response: ${message}` 
+    return {
+      ...prevState,
+      messages: newHistory, // Keep history up to the user's message
+      error: `Failed to get response: ${message}`,
     };
   }
 }
