@@ -25,7 +25,7 @@ const chatFlow = ai.defineFlow(
     outputSchema: z.string(),
   },
   async ({message}) => {
-    const {output} = await ai.generate({
+    const response = await ai.generate({
       prompt: `You are a friendly and helpful AI assistant named "વિદ્યાર્થી મિત્ર" (Student Friend) for an educational platform called "વિદ્યાર્થી સહાયક" (Student Helper) for students in Gujarat, India (grades 9-12).
 
 Your primary language for conversation should be Gujarati, but you can use English for technical terms if needed.
@@ -37,6 +37,6 @@ The user has asked the following question:
 
 Provide a direct and helpful answer.`,
     });
-    return output!;
+    return response.text;
   }
 );
