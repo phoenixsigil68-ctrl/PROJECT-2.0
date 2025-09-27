@@ -43,6 +43,7 @@ export function Chat() {
 
   useEffect(() => {
     if (state.formKey > 0) {
+      formRef.current?.reset();
       inputRef.current?.focus();
     }
   }, [state.formKey]);
