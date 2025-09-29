@@ -6,7 +6,7 @@ import { QuotesSlider } from '@/components/home/quotes-slider';
 import { DailyProgress } from '@/components/home/daily-progress';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
-import { FileImage, GraduationCap } from 'lucide-react';
+import { Sparkles, GraduationCap } from 'lucide-react';
 
 export default function Home() {
   const heroImageData = placeholderImages.placeholderImages.find(img => img.id === 'hero-image');
@@ -54,7 +54,7 @@ export default function Home() {
         <div className="lg:col-span-2 flex justify-center">
           <Button asChild variant="outline" size="lg" className="shadow-lg hover:shadow-primary/20 hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1">
             <Link href="/quiz-from-image">
-              <FileImage className="mr-2 text-primary" />
+              <Sparkles className="mr-2 text-primary" />
               Create Quiz with Image
             </Link>
           </Button>
