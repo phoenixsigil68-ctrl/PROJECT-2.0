@@ -54,7 +54,7 @@ export default function Home() {
         <div className="lg:col-span-2 flex justify-center">
           <Button asChild variant="outline" size="lg" className="shadow-lg hover:shadow-primary/20 hover:bg-primary/5 transition-all duration-300 transform hover:-translate-y-1">
             <Link href="/quiz-from-image">
-              <Sparkles className="mr-2 text-primary" />
+              <Sparkles className="mr-2 h-5 w-5 text-primary" />
               Create Quiz with Image
             </Link>
           </Button>

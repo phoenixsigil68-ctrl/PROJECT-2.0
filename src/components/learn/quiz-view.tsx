@@ -5,7 +5,7 @@ import { QuizGenerator } from './quiz-generator';
 import { Separator } from '../ui/separator';
 import { Button } from '../ui/button';
 import Link from 'next/link';
-import { FileImage } from 'lucide-react';
+import { FileImage, Sparkles } from 'lucide-react';
 
 export function QuizView({ chapter, grade, subject }: { chapter: Chapter; grade: Grade; subject: Subject }) {
   return (
@@ -46,6 +46,7 @@ export function QuizView({ chapter, grade, subject }: { chapter: Chapter; grade:
           <CardContent>
              <Button asChild variant="outline">
                 <Link href="/quiz-from-image">
+                    <Sparkles className="mr-2 h-5 w-5" />
                     For Create Quiz with Image click here
                 </Link>
              </Button>
