@@ -11,6 +11,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 import { cn } from '@/lib/utils';
 import { useToast } from '@/hooks/use-toast';
 import { Message } from 'genkit';
+import { BotImage } from './ui/BotImage';
 
 const initialChatState: ChatState = {
   formKey: 0,
@@ -65,15 +66,15 @@ export function Chat() {
       </CardHeader>
       <CardContent>
         <ScrollArea className="h-96 w-full pr-4" ref={scrollAreaRef}>
-          <div className="space-y-4">
+          <div className="space-y-4 ">
             {state.messages.map((message, index) => (
               <div
                 key={index}
                 className={cn(
-                  'flex max-w-[75%] flex-col gap-2 rounded-lg px-3 py-2 text-sm',
+                  'flex max-w-max flex-col gap-2 rounded-lg px-3 py-2 text-sm',
                   message.role === 'user'
-                    ? 'ml-auto bg-primary text-primary-foreground'
-                    : 'bg-muted'
+                    ? 'ml-auto bg-user-chat text-white text-xl'
+                    : 'bg-chatbot-chat text-xl p-6 text-white'
                 )}
               >
                 <p className="whitespace-pre-wrap break-words">

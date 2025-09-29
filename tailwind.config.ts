@@ -17,6 +17,9 @@ export default {
       colors: {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
+        "chatbot-chat": "rgba(53, 53, 53)",
+        "user-chat": "rgba(0, 92, 75)",
+        "chat-color": "#162938",
         card: {
           DEFAULT: 'hsl(var(--card))',
           foreground: 'hsl(var(--card-foreground))',
