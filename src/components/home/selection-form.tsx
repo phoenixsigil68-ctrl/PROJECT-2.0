@@ -91,7 +91,7 @@ export function SelectionForm() {
       <Button
         type="submit"
         size="lg"
-        className="w-full text-lg text-primary-foreground transition-all duration-300 hover:bg-accent hover:shadow-lg hover:-translate-y-1"
+        className="w-full text-lg text-primary-foreground transition-all duration-700 hover:bg-accent hover:shadow-lg hover:-translate-y-2"
         disabled={!selectedGrade || !selectedSubject || !selectedChapter}
       >
         <BookOpen className="mr-2 h-5 w-5" />
