@@ -149,7 +149,7 @@ export function QuizTaker({ initialQuestions, chapterId }: { initialQuestions: Q
         </Button>
         {currentQuestionIndex === questions.length - 1 ? (
           <Button onClick={handleSubmit} disabled={userAnswers[currentQuestionIndex] === -1}>
-            જમા કરો
+            ક્વિઝ પૂર્ણ કરો
           </Button>
         ) : (
           <Button onClick={() => setCurrentQuestionIndex(prev => prev + 1)} disabled={userAnswers[currentQuestionIndex] === -1}>
